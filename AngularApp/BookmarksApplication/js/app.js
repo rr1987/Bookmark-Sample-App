@@ -1,5 +1,6 @@
 var app= angular.module('bookmarkApp', ['bookmarkService','bookmarkController','ngRoute','customDirective']);
 
+//Config to route
 app.config(function($routeProvider) {
         $routeProvider
 
@@ -15,6 +16,7 @@ app.config(function($routeProvider) {
             });
     });
 
+// unique fiter of Angular-ui
 app.filter('unique', function () {
 
   return function (items, filterOn) {

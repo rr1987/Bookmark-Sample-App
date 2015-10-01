@@ -1,44 +1,25 @@
 angular.module('bookmarkController', ['ngRoute'])
 	
-	// inject the Todo service factory into our controller
 	.controller('mainController', ['$scope','$route','$routeParams','BookmarksDataFactory','commonData', function($scope,$route, $routeParams,BookmarksDataFactory,commonData) {
-		//$locationProvider.html5Mode(true);
-		/*$scope.bookmarks =[];
-		$scope.bookmarkFolders=[];
-		$scope.editValues = false;
-		$scope.newBookmark={
-				Title:"",
-				Url:"",
-				Folder:""
-			};*/
+		
+		// Get the model from the factory to the scope
 		$scope.BookmarkInfo= commonData;
-		console.log($scope.BookmarkInfo);
-		//var typeOfPage = $route.current.type;
 		
-		
-		
-		// GET =====================================================================
-		// when landing on the page, get all todos and show them
-		// use the service to get all the todos
-		
+		// To load the data into the appropriate scope variables
 		var loadData = function(pageType){
+		
 			$scope.BookmarkInfo.newBookmark = {};
 			$scope.searchTerm="";
 			$scope.BookmarkInfo.editValues=false;
-			console.log(pageType);
 			$scope.BookmarkInfo.pageType = pageType;
+			
 			if(pageType !=null && pageType == "folder"){
 				$scope.folderName = $routeParams.folder;
 				console.log($scope.folderName);
 				console.log($scope.BookmarkInfo.bookmarkFolders);
-				//BookmarksDataFactory.getAllBookmarksInFolder($scope.folderName)
-					//.success(function(data) {
 						$scope.BookmarkInfo.bookmarkFolders = $scope.BookmarkInfo.bookmarkFolders.filter(bookmarkToRetain,$scope.folderName);
 						console.log($scope.BookmarkInfo.bookmarkFolders);
-						
 						customSelectData();
-
-					//});
 			}
 			else{
 				BookmarksDataFactory.getAllBookmarks()
@@ -65,6 +46,7 @@ angular.module('bookmarkController', ['ngRoute'])
 			}
 		}
 		
+		// Load the folder names into the custom select dropdown
 		function customSelectData() {
 			
 			if($scope.BookmarkInfo.bookmarkFolders.length ==0){
@@ -78,7 +60,7 @@ angular.module('bookmarkController', ['ngRoute'])
 								}
 							});
 			}
-					$scope.growableOptions = {
+			$scope.growableOptions = {
 						displayText: 'Select or add a new folder...',
 						addText: 'Add new Folder',
 						onAdd: function (searchTerm) {
@@ -88,26 +70,44 @@ angular.module('bookmarkController', ['ngRoute'])
 							console.log($scope.BookmarkInfo.growable);
 							return searchTerm;
 						}
-					};
+			};
 		
 		
 		}
-		function suggest_state(term) {
-			var q = term.toLowerCase().trim();
-			var results = [];
-
-			// Find first 10 states that start with `term`.
-			for (var i = 0; i < $scope.BookmarkInfo.bookmarkFolders.length && results.length < 10; i++) {
-			var state = $scope.BookmarkInfo.bookmarkFolders[i];
-			console.log(state);
-			if (state.Folder.toLowerCase().indexOf(q) === 0)
-				results.push({ label: state.Folder, value: state.Folder });
+		
+		//To filter out the deleted or updated values from the scope
+		function bookmarkToRetain(value){
+			
+				if(value.Folder.toString() == this.toString())
+				{
+					return true;
+				}
+				else
+					return false;
+			
+		}
+		
+		//To filter out the deleted or updated values from the scope
+		function bookmarkToBeDeleted(value){
+			if(this[1] == "folder"){
+				if(value.Folder.toString() == this[0].toString())
+				{
+					return false;
+				}
+				else
+					return true;
 			}
-
-			return results;
+			else{
+				if(value._id.toString() == this[0].toString())
+				{
+					return false;
+				}
+				else
+					return true;
+				}
 		}
-
 		
+		// Load the data into the scope 
 		$scope.$on('$routeChangeSuccess', function ($scope,$routeParams) {
 			console.log($routeParams);
 			console.log($routeParams.params);
@@ -118,20 +118,16 @@ angular.module('bookmarkController', ['ngRoute'])
 		
 
 		// CREATE ==================================================================
-		// when submitting the add form, send the text to the node API
+		// To create a new bookmark
 		$scope.createBookmark = function(bookmark) {
 			$scope.searchTerm="";
 			if (bookmark != undefined) {
-				//$scope.loading = true;
 				console.log(bookmark);
-				
-				
 				var bookmarkString = angular.toJson(bookmark);
-				// call the create function from our service (returns a promise object)
 				BookmarksDataFactory.createBookmark(bookmarkString)
 					.success(function(data) {
 						console.log(data);
-						$scope.BookmarkInfo.newBookmark = {}; // clear the form so our user is ready to enter another
+						$scope.BookmarkInfo.newBookmark = {}; 
 						if(bookmark.Folder == "" || bookmark.Folder == null){
 								$scope.BookmarkInfo.bookmarks.push(data[0]);
 								
@@ -145,6 +141,7 @@ angular.module('bookmarkController', ['ngRoute'])
 			}
 		};
 		
+		// To populate the bookmark in the form fields when edited
 		$scope.editBookmark = function(bookmark){
 		console.log(bookmark);
 			$scope.BookmarkInfo.newBookmark = bookmark;
@@ -152,6 +149,8 @@ angular.module('bookmarkController', ['ngRoute'])
 			console.log($scope.BookmarkInfo.newBookmark);
 		}
 		
+		// UPDATE ==================================================================
+		// To update the bookmark
 		$scope.updateBookmark = function(bookmark) {
 			$scope.searchTerm="";
 			if(bookmark.Folder=="" || $scope.BookmarkInfo.newBookmark.Folder == null){
@@ -198,9 +197,8 @@ angular.module('bookmarkController', ['ngRoute'])
 		};
 		
 		// DELETE ==================================================================
-		// delete a todo after checking it
+		//to delete the bookmark
 		$scope.deleteBookmark = function(id,$index) {
-			//$scope.loading = true;
 			console.log($index +"id"+ id);
 			if($scope.BookmarkInfo.pageType !=null && $scope.BookmarkInfo.pageType == "folder"){
 			
@@ -213,8 +211,7 @@ angular.module('bookmarkController', ['ngRoute'])
 			
 			BookmarksDataFactory.deleteBookmark(id)
 				.success(function(data) {
-					//$scope.loading = false;
-					//$scope.todos = data; // assign our new list of todos
+
 				});
 			$scope.BookmarkInfo.newBookmark = {};
 			
@@ -222,43 +219,12 @@ angular.module('bookmarkController', ['ngRoute'])
 			
 		};
 		
-		function bookmarkToRetain(value){
-			
-				if(value.Folder.toString() == this.toString())
-				{
-					return true;
-				}
-				else
-					return false;
-			
-		}
-		
-		function bookmarkToBeDeleted(value){
-			if(this[1] == "folder"){
-				if(value.Folder.toString() == this[0].toString())
-				{
-					return false;
-				}
-				else
-					return true;
-			}
-			else{
-				if(value._id.toString() == this[0].toString())
-				{
-					return false;
-				}
-				else
-					return true;
-				}
-		}
-		
+		//to delete the bookmark folder
 		$scope.deleteBookmarkFolder = function(folder) {
-			//$scope.bookmarkFolders = $filter('filter')($scope.bookmarkFolders, {Folder: 'News'});
 			$scope.BookmarkInfo.bookmarkFolders= $scope.BookmarkInfo.bookmarkFolders.filter(bookmarkToBeDeleted,[folder,"folder"]);
 			customSelectData();
 			console.log($scope.BookmarkInfo.bookmarkFolders);
 			BookmarksDataFactory.deleteFolder(folder)
-				// if successful creation, call our get function to get all the new todos
 				.success(function(data) {
 					
 				});
