@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
-    "express": "*",
-    "mongodb": "1.4.*",
-    "node-fs": "*",
-    "bson":"*"
+    "express": "4.13.3",
+    "mongodb": "1.4.39",
+    "node-fs": "0.1.17",
+    "bson":"0.4.12"
   },
   "scripts": {
     "start": "node server.js"
