@@ -5,7 +5,7 @@
   "dependencies": {
     "express": "4.13.3",
     "mongodb": "1.4.39",
-    "node-fs": "0.1.17",
+    "node-fs": "0.1.7",
     "bson":"0.4.12"
   },
   "scripts": {
