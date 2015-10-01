@@ -1,0 +1,18 @@
+[
+	{
+		"Title":"Apple",
+		"Url":"http://www.apple.com/in/",
+		"Folder":""
+	},
+	{
+		"Title":"Economic Times",
+		"Url":"http://economictimes.indiatimes.com/",
+		"Folder":"News"
+	},
+	{
+		"Title":"BBC News",
+		"Url":"http://www.bbc.com/news",
+		"Folder":"News"
+	}
+	
+]

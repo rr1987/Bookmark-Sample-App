@@ -1,0 +1,74 @@
+<!-- TODO LIST -->
+			<div class="container-fluid results">
+				<div ng-show = "((BookmarkInfo.bookmarks.length ==0) && (BookmarkInfo.bookmarkFolders.length ==0) )"><h5 style="text-align:center;">No bookmarks available. Please add Bookmarks</h5></div>
+				<div class="portfolio clearfix">
+					<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarks | unique:'_id'">
+						<div class="hover-fx" style="height: 100px;width: 100px;">
+										<img src="images/webSite2.png" height="50" width="50" alt="#">
+						</div>
+						<div class="detailes" >
+										<h5> <a ng-href="http:\\{{bookmark.Url}}" target="_blank" >{{ bookmark.Title }}</a> </h5>
+										<!--<a href="#">3D Model</a>, <a href="#">Life</a>-->
+										<a href="javascript:;">
+						<i class="fa fa-pencil-square-o fa-lg margin2buttons" ng-click="editBookmark(bookmark)"></i>
+						</a>
+						<a href="javascript:;">
+						<i class="fa fa-trash-o fa-lg margin2buttonsb" ng-click="deleteBookmark(bookmark._id,$index)"></i>
+						</a>
+						</div>
+					</div>
+				</div>
+				<!--<div class="portfolio clearfix">
+					<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarks | unique:'_id'">
+						
+							<a ng-href="http:\\{{bookmark.Url}}" target="_blank">
+								<table>
+								<tr><td>
+								<i class="fa fa-folder fa-4x marginForIcon"></i> </td><td  style="padding: 8px;padding-top: 33px;">
+									<span>{{ bookmark.Title }}</span></td></tr>
+									</table>
+									</a>
+						
+						<a href="javascript:;">
+						<i class="fa fa-pencil-square-o fa-lg margin2buttons" ng-click="editBookmark(bookmark)"></i>
+						</a>
+						<a href="javascript:;">
+						<i class="fa fa-trash-o fa-lg margin2buttons" ng-click="deleteBookmark(bookmark._id,$index)"></i>
+						</a>
+					</div>
+				</div>-->
+					</br>
+				
+				
+				<div class="portfolio clearfix">
+					<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarkFolders | unique:'Folder'">
+						<div class="hover-fx" style="height: 100px;width: 100px;">
+										<img src="images/site.png" alt="#">
+						</div>
+						<div class="detailes" >
+										<h5> <a href="#/folderBookmarks/folder/{{bookmark.Folder}}" >{{ bookmark.Folder }}</a> </h5>
+										<!--<a href="#">3D Model</a>, <a href="#">Life</a>-->
+										
+						<a href="javascript:;">
+						<i class="fa fa-trash-o fa-lg margin2buttonsb" ng-click="deleteBookmarkFolder(bookmark.Folder,$index)"></i>
+						</a>
+						</div>
+					</div>
+				</div>
+				<!--
+				<div class="portfolio clearfix">
+					<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarkFolders | unique:'Folder'">
+						<a href="#/folderBookmarks/folder/{{bookmark.Folder}}">
+							<label>{{ bookmark.Folder }}</label>
+						</a>
+						<a href="javascript:;">
+							<i class="fa fa-trash-o fa-lg margin1button" ng-click="deleteBookmarkFolder(bookmark.Folder,$index)"></i>
+						</a>
+					</div>
+				</div>-->
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		

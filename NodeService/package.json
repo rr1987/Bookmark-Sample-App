@@ -1,0 +1,10 @@
+{
+	"name":"Bookmarks-service",
+	"version":"0.0.1",
+	"private":"true",
+	"dependencies":{
+		"express":"*",
+		"mongodb":"1.4.*",
+		"node-fs":"*"
+	}
+}

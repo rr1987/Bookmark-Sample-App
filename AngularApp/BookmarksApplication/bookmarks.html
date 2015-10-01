@@ -1,0 +1,262 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="bookmarkApp">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Bookmarks</title>
+
+	<!-- SCROLLS -->
+	<link rel="stylesheet" href="css/bootstrap-2.3.2.min.css"><!-- load bootstrap -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css" />
+	<style>
+		html 					{ overflow-y:scroll; }
+		
+		#todo-list 				{ margin-bottom:30px; }
+		#todo-form 	 			{ margin-bottom:50px; }
+		.grid-3 {
+		height:160px;
+		min-width:150px;
+		background-color:#fff;
+		}
+		.clearfix {
+    zoom: 1;
+}
+		.portfolio {
+    width: 100% !important;
+	
+}
+.portfolio label {
+	height:50px;
+}
+
+.marginForIcon {
+	margin-top: 17px;
+    margin-left: 10px;
+	
+}
+
+.margin2buttons {
+	margin-top: 8px;
+    float: left;
+    margin-left: 8px;
+	
+}
+.margin2buttonsb {
+	margin-top: 8px;
+    float: right;
+    margin-right: 8px;
+	
+}
+.margin1button {
+	margin-top: 8px;
+    margin-left: 65px;
+	
+}
+.portDiv {
+	margin: 6px 10px;
+	padding-top: 10px;
+	border: 1px solid #e6e6e6;
+	-webkit-border-radius: 4px;
+	border-radius: 15px;
+	-webkit-transition: border 0.2s ease, box-shadow 0.2s ease;
+	transition: border 0.2s ease, box-shadow 0.2s ease;
+	border-bottom: 3px solid #e6e6e6;
+	float: left;
+	margin: 0 67px 67px;
+	overflow: hidden;
+	position: relative;
+	
+}
+.detailes {
+	text-align: center;
+	/*padding: 20px 0;*/
+	display: block;
+	color: #BFBFBF;
+	background: #fff;
+	height: 45px;
+	padding-top: 9px;
+}
+.detailes h5 {
+	margin: 0 0 2px 0;
+	font-weight: normal;
+}
+.detailes h5 a {
+	color: #696969;
+}
+.detailes a {
+	color: #BFBFBF;
+}
+.detailes a:hover, .detailes h5 a:hover {
+	color: #f39c12;
+}
+.hover-fx {
+	overflow: hidden;
+	position: relative;
+	background: transparent;
+	padding-left: 23px;
+}
+.hover-fx img {
+	
+	opacity: 1;
+	width: 150px;
+	height:100px;
+	-webkit-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.inputFieldForBookmark {
+	border:none !important;
+	border-bottom: 1px dashed !important;
+	border-bottom-color: #000 !important;
+	box-shadow:none !important;
+	border-radius:0 !important;
+	font-style: italic;
+	font-style: italic;
+    font-size: medium;
+	margin: 10px;
+    margin-right: 3%;
+}
+.buttonsDiv {
+ margin-top:15px;
+}
+.page{
+ /*background-image: url("images/bgg.png");
+ background-repeat:repeat-x;*/
+}
+.results{
+	background-image:url("images/bg_container.png");
+background-repeat:repeat;
+padding-top:45px;
+    border-radius: 72px;
+    margin-left: 1px;
+}
+.head {
+    position: relative;
+    background: #fff url(images/head.jpg) repeat-x top center;
+    border-top: 5px solid;
+    border-bottom: 1px solid;
+	border-color: #2E55C3  !important;
+	}
+.clearfix:after {
+    content: '\0020';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+.linear {
+    display: block;
+   width: 99%;
+    border-bottom: 2px solid #2E55C3;
+    margin: -1px 0 20px;
+}
+.title{
+font-style: italic;
+    color: #2E55C3;
+	}
+.formDiv{
+margin-top:20px;
+}
+.col-title {
+    padding: 0 0 10px;
+    margin: 0;
+    margin-left: 7%;
+    font-size: 18px;
+    /* border-bottom: 1px solid #000; */
+    display: inline-block;
+	color: #2E55C3;
+}
+.searchContent {
+    float: right;
+}
+.searchTextLbl {
+    float: left;
+    padding: 5px;
+    text-transform: none;
+    font-size: 14px;
+}
+.searchTextBox {
+    border-radius: 3px;
+    float: left;
+    font-family: "Marcellus", Tahoma, Arial;
+    font-size: 14px;
+    text-indent: 2px;
+}
+.project-links {
+        float: right;
+    color: #ccc;
+    margin-right: 5%;
+}
+	</style>
+
+	<!-- SPELLS -->
+	<script src="js/lib/jquery/jquery-2.1.1.min.js"></script><!-- load jquery -->
+	<script src="js/lib/bootstrap/bootstrap-2.3.2.min.js"></script>
+	<script src="js/lib/angular/angular.min.js"></script><!-- load angular -->
+	<script src="js/lib/angular/angular-route.min.js"></script>
+	<script src="js/app.js"></script> <!-- load our main application -->
+	<script src="js/service/bookmarkDataService.js"></script> <!-- load our todo service -->
+	<script src="js/directive/customSelect.js"></script>
+	<script src="js/controller/main.js"></script> <!-- load up our controller -->
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController" class="page">
+
+		<header>
+		<div class="jumbotron text-center head">
+			<h1 class="title">BookMarks </h1>
+		</div>
+		</header>
+	<div class="container">
+
+		
+		<div id="todo-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<div class="formDiv">
+					<div class="form-group">
+						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+						<input type="text" class="form-control text-center inputFieldForBookmark" placeholder="Title" ng-model="BookmarkInfo.newBookmark.Title">
+						<input type="text" class="form-control text-center inputFieldForBookmark" placeholder="Url" ng-model="BookmarkInfo.newBookmark.Url">
+						<div class="form-control" style = "box-shadow:none;height:32px;" custom-select="g for g in BookmarkInfo.growable | filter: $searchTerm" ng-model="BookmarkInfo.newBookmark.Folder" custom-select-options="growableOptions"></div>
+						<!--<input type="text" class="form-control input-lg text-center" placeholder="Folder" ng-model="BookmarkInfo.newBookmark.Folder"> -->
+						
+					</div>
+					
+					<!--<div mass-autocomplete>
+						<input ng-model="dirty.value" mass-autocomplete-item="autocomplete_options">
+					</div>-->
+					
+					<div class="clearfix buttonsDiv">
+						<button type="submit" ng-hide="BookmarkInfo.editValues" class="btn btn-primary btn-lg" ng-click="createBookmark(BookmarkInfo.newBookmark)">Add</button>
+						<button type="submit" ng-show="BookmarkInfo.editValues" class="btn btn-primary btn-lg" ng-click="updateBookmark(BookmarkInfo.newBookmark)">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="linear"></div>
+		<!--<div>
+					<h3 class="col-title"> Apps </h3>
+					<div class="searchContent"><h4 class="searchTextLbl">Search</h4> <input ng-model="searchBookmark.Title" class="searchTextBox ng-pristine ng-valid"></div>
+					
+				</div>-->
+		<!-- TODO LIST -->
+		<div id="todo-list" class="row ">
+			 <div ng-view></div>
+			 
+		</div>
+		
+		<!-- FORM TO CREATE TODOS -->
+		
+
+
+	</div>
+
+</body>
+</html>

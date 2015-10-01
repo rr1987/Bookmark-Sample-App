@@ -1,0 +1,45 @@
+<!-- TODO LIST -->
+	<div>
+	<h3 class="col-title"> {{folderName}} </h3>
+				<div class="project-links">
+						<!--<a href="portfolio-single-wide-image.html"><i class="icon-angle-left mi"></i>Previous</a>-->
+						<a href="#/"> <i class="fa fa-backward fa-lg"></i> </a>
+						<!--<a href="portfolio-single-wide-video.html">Next<i class="icon-angle-right mii"></i></a>-->
+					</div>
+	</div>
+	<div class="container-fluid results">
+	<div ng-show = "(BookmarkInfo.bookmarkFolders.length ==0)"><h5 style="text-align:center;">No bookmarks available. Please add Bookmarks</h5></div>
+	<div class="portfolio clearfix">
+					<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarkFolders | unique:'_id'">
+						<div class="hover-fx" style="height: 100px;width: 100px;">
+										<img src="images/webSite2.png" height="50" width="50" alt="#">
+						</div>
+						<div class="detailes" >
+										<h5> <a ng-href="http:\\{{bookmark.Url}}" target="_blank" >{{ bookmark.Title }}</a> </h5>
+										<!--<a href="#">3D Model</a>, <a href="#">Life</a>-->
+										<a href="javascript:;">
+						<i class="fa fa-pencil-square-o fa-lg margin2buttons" ng-click="editBookmark(bookmark)"></i>
+						</a>
+						<a href="javascript:;">
+						<i class="fa fa-trash-o fa-lg margin2buttonsb" ng-click="deleteBookmark(bookmark._id,$index)"></i>
+						</a>
+						</div>
+					</div>
+				</div>
+			<!--<div class="portfolio clearfix">
+	
+				<div class="grid-3" ng-repeat="bookmark in BookmarkInfo.bookmarkFolders | unique:'_id'">
+					<label>
+						 <a ng-href="http:\\{{bookmark.Url}}" target="_blank">{{ bookmark.Title }}</a>
+					</label>
+					<a href="javascript:;">
+					<i class="fa fa-pencil-square-o fa-lg margin2buttons" ng-click="editBookmark(bookmark)"></i>
+					</a>
+					<a href="javascript:;">
+					<i class="fa fa-trash-o fa-lg margin2buttons" ng-click="deleteBookmark(bookmark._id,$index)"></i>
+					</a>
+				</div>
+				</br>
+			</div> -->
+			
+</div>
