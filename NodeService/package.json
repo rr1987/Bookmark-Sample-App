@@ -1,10 +1,29 @@
 {
-	"name":"Bookmarks-service",
-	"version":"0.0.1",
-	"private":"true",
-	"dependencies":{
-		"express":"*",
-		"mongodb":"1.4.*",
-		"node-fs":"*"
-	}
+  "name": "Bookmarks-service",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "express": "*",
+    "mongodb": "1.4.*",
+    "node-fs": "*",
+    "bson":"*"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "Service to retrieve bookmarks from Mongo DB",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rr1987/Bookmark-Sample-App.git"
+  },
+  "keywords": [
+    "bookmark"
+  ],
+  "author": "rr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rr1987/Bookmark-Sample-App/issues"
+  }
 }
