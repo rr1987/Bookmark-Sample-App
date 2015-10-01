@@ -6,22 +6,13 @@ angular.module('bookmarkController', ['ngRoute'])
 		$scope.BookmarkInfo= commonData;
 		
 		// To load the data into the appropriate scope variables
-		var loadData = function(pageType){
+		var loadData = function(){
 		
 			$scope.BookmarkInfo.newBookmark = {};
+			$scope.BookmarkInfo.folderSelected="";
 			$scope.searchTerm="";
 			$scope.BookmarkInfo.editValues=false;
-			$scope.BookmarkInfo.pageType = pageType;
 			
-			if(pageType !=null && pageType == "folder"){
-				$scope.folderName = $routeParams.folder;
-				console.log($scope.folderName);
-				console.log($scope.BookmarkInfo.bookmarkFolders);
-						$scope.BookmarkInfo.bookmarkFolders = $scope.BookmarkInfo.bookmarkFolders.filter(bookmarkToRetain,$scope.folderName);
-						console.log($scope.BookmarkInfo.bookmarkFolders);
-						customSelectData();
-			}
-			else{
 				BookmarksDataFactory.getAllBookmarks()
 					.success(function(data) {
 						if(data.length == 0) {
@@ -43,9 +34,9 @@ angular.module('bookmarkController', ['ngRoute'])
 						}
 						
 					});
-			}
+			
 		}
-		
+		loadData();
 		// Load the folder names into the custom select dropdown
 		function customSelectData() {
 			
@@ -107,12 +98,20 @@ angular.module('bookmarkController', ['ngRoute'])
 				}
 		}
 		
+		var setPageConfig = function(folder,pageType){
+			$scope.BookmarkInfo.folderSelected = folder;
+			$scope.BookmarkInfo.pageType = pageType;
+			$scope.BookmarkInfo.newBookmark = {};
+			$scope.searchTerm="";
+			$scope.BookmarkInfo.editValues=false;
+		}
+		
 		// Load the data into the scope 
 		$scope.$on('$routeChangeSuccess', function ($scope,$routeParams) {
 			console.log($routeParams);
 			console.log($routeParams.params);
-			
-			loadData($routeParams.params.type);
+			setPageConfig($routeParams.params.folder,$routeParams.params.type);
+			//loadData($routeParams.params.type);
 			
 		});
 		
@@ -167,11 +166,11 @@ angular.module('bookmarkController', ['ngRoute'])
 					angular.forEach( $scope.BookmarkInfo.bookmarkFolders, function(item,index){
 						if(item._id == bookmark._id){
 						satisfied=true;
-							if($scope.folderName == bookmark.Folder){
+							//if($scope.BookmarkInfo.folderName == bookmark.Folder){
 								$scope.BookmarkInfo.bookmarkFolders[index] = bookmark;
-							}else{
-								$scope.BookmarkInfo.bookmarkFolders.splice(index,1);
-							}
+							//}else{
+								//$scope.BookmarkInfo.bookmarkFolders.splice(index,1);
+							//}
 						}
 					});
 				if(!satisfied){
