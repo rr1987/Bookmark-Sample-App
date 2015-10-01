@@ -8,6 +8,10 @@
     "node-fs": "0.1.7",
     "bson":"0.4.12"
   },
+  "engines": {
+    "node": "4.1.1",
+    "npm" : "2.14.4"
+  },
   "scripts": {
     "start": "node server.js"
   },
@@ -16,7 +20,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/rr1987/Bookmark-Sample-App.git"
+    "url": "https://github.com/rr1987/BookmarkApp.git"
   },
   "keywords": [
     "bookmark"
@@ -24,6 +28,6 @@
   "author": "rr",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rr1987/Bookmark-Sample-App/issues"
+    "url": "https://github.com/rr1987/BookmarkApp/issues"
   }
 }
