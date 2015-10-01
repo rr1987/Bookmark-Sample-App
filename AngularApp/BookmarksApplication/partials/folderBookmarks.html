@@ -1,5 +1,5 @@
 <div>
-	<h3 class="col-title"> {{folderName}} </h3>
+	<h3 class="col-title"> {{BookmarkInfo.folderSelected}} </h3>
 		<div class="project-links">
 			<a href="#/"> <i class="fa fa-backward fa-lg"></i> </a>
 		</div>
@@ -7,7 +7,7 @@
 	<div class="container-fluid results">
 	<div ng-show = "(BookmarkInfo.bookmarkFolders.length ==0)"><h5 style="text-align:center;">No bookmarks available. Please add Bookmarks</h5></div>
 	<div class="portfolio clearfix">
-		<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarkFolders | unique:'_id'">
+		<div class="grid-3 portDiv" ng-repeat="bookmark in BookmarkInfo.bookmarkFolders" ng-if="bookmark.Folder == BookmarkInfo.folderSelected">
 			<div class="hover-fx" style="height: 100px;width: 100px;">
 				<img src="css/images/webSite2.png" height="50" width="50" alt="#">
 			</div>
